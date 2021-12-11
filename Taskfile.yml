@@ -1,0 +1,16 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+  proto:
+    cmds:
+      - protoc -I=. --go_out=plugins=grpc:./greet greet/greetpb/*.proto
+      - protoc -I=. --go_out=plugins=grpc:./calculator calculator/calculatorpb/*.proto
