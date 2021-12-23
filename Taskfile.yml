@@ -14,3 +14,4 @@ tasks:
     cmds:
       - protoc -I=. --go_out=plugins=grpc:./greet greet/greetpb/*.proto
       - protoc -I=. --go_out=plugins=grpc:./calculator calculator/calculatorpb/*.proto
+      - protoc -I=. --go_out=plugins=grpc:./blog blog/blogpb/*.proto

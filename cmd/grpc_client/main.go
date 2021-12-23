@@ -4,19 +4,20 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/jwmwalrus/grpc-go/calculator"
-	"github.com/jwmwalrus/grpc-go/calculator/calculatorpb"
+	"github.com/jwmwalrus/grpc-go/blog"
+	"github.com/jwmwalrus/grpc-go/blog/blogpb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
 
 const (
-	useTLS   = true
+	useTLS   = false
 	certFile = "ssl/ca.crt"
 )
 
 func main() {
-	fmt.Println("Running client...")
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+	fmt.Println("Running client")
 
 	opts := grpc.WithInsecure()
 	if useTLS {
@@ -42,10 +43,17 @@ func main() {
 	// greet.DoDeadline(c, 1*time.Second)
 	// greet.DoDeadline(c, 5*time.Second)
 
-	c := calculatorpb.NewCalculatorServiceClient(cc)
+	// c := calculatorpb.NewCalculatorServiceClient(cc)
 	// calculator.DoUnary(c)
 	// calculator.DoStreamingServer(c)
 	// calculator.DoStreamingClient(c)
-	calculator.DoBidirectionalStreaming(c)
+	// calculator.DoBidirectionalStreaming(c)
 	// calculator.DoErrorUnary(c)
+
+	c := blogpb.NewBlogServiceClient(cc)
+	// blog.DoCreateBlog(c)
+	// blog.DoReadBlog(c)
+	// blog.DoUpdateBlog(c)
+	// blog.DoDeleteBlog(c)
+	blog.DoListBlog(c)
 }
